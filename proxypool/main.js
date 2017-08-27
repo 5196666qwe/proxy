@@ -43,6 +43,7 @@ class Task {
         var client = RedisClient;
         var adder = new PoolAdder();
         while ( true ) {
+            log('checkPool is running')
             var queueLen = await client.len();
             if (queueLen < CONFIG.POOLMINTHRESHOLD) await adder.addProxy();
             await Time.sleep(CYCLE)

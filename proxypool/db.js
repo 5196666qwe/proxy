@@ -15,7 +15,6 @@ class RedisClient {
         });
     }
 
-    // 获取左边的 元素，然后删除，这样保证一直是 更新的
     get(count = 1) {
         var self = this._db;
         return self.lrange('proxies', 0, count - 1)
@@ -36,6 +35,10 @@ class RedisClient {
 
     len() {
         return this._db.llen('proxies')
+    }
+
+    getAll(){
+        return this._db.lrange('proxies',0,-1);
     }
 }
 

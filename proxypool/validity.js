@@ -33,10 +33,11 @@ class Validity {
         try {
             var proxy = await new Promise((resolve, reject) => {
                 request(options, function (err, res, body) {
-                    if (err) return reject(`Invalid Ip : ${proxy} `)
+                    if (err) return reject(`Invalid Ip : ${proxy}`)
                     if (!err && res.statusCode === 200) {
                         resolve(proxy)
                     }
+                    resolve(false)
                 })
             })
         } catch (e) {

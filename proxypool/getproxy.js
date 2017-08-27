@@ -5,6 +5,7 @@ var log = console.log.bind(console)
 
 var options = {
     url: "",
+    timeout: 10 * 1000,
     headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
         'Accept-Language': 'zh-CN,zh;q=0.8'
@@ -134,7 +135,10 @@ function requestPromise(url) {
     options.url = url;
     return new Promise((resolve, reject) => {
         request(options, function (err, res, body) {
-            if (err) return reject(err)
+            if (err){
+                log(err);
+                return resolve(false);
+            } 
             if (!err && res.statusCode === 200) {
                 resolve(body)
             } else {
