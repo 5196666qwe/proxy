@@ -135,15 +135,11 @@ function requestPromise(url) {
     options.url = url;
     return new Promise((resolve, reject) => {
         request(options, function (err, res, body) {
-            if (err){
-                log(err);
-                return resolve(false);
-            } 
+            if (err) log(err);
             if (!err && res.statusCode === 200) {
                 resolve(body)
-            } else {
-                resolve(false)
-            }
+            } 
+            resolve(false)
         })
     })
 }
